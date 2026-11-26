@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="description" content="Strona informacyjno-konsultacyjna Rady Osiedla Nowe Miasto w Rzeszowie dotycząca pomysłu wprowadzenia Strefy Płatnego Parkowania (SPP) na części osiedla.">
+  <meta name="theme-color" content="#1E3A5F">
+  <title>Konsultacje SPP – Rada Osiedla Nowe Miasto w Rzeszowie</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Przejdź do treści</a>
+
+  <!-- Nawigacja główna -->
+  <header class="site-header" id="top">
+    <div class="container header-inner">
+      <a class="brand" href="#start" aria-label="Rada Osiedla Nowe Miasto w Rzeszowie – strona główna">
+        <span class="brand-mark" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 17V7h4a3 3 0 0 1 0 6H9"></path>
+            <rect x="3" y="3" width="18" height="18" rx="4"></rect>
+          </svg>
+        </span>
+        <span class="brand-text">Rada Osiedla Nowe Miasto <span aria-hidden="true">•</span> Rzeszów</span>
+      </a>
+
+      <button
+        type="button"
+        class="nav-toggle"
+        id="nav-toggle"
+        aria-expanded="false"
+        aria-controls="primary-nav"
+        aria-label="Otwórz menu nawigacji"
+      >
+        <span class="nav-toggle-icon" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
+        <span class="nav-toggle-label">Menu</span>
+      </button>
+
+      <nav class="primary-nav" id="primary-nav" aria-label="Nawigacja główna">
+        <ul class="nav-list">
+          <li><a class="nav-link" href="#bilans">Bilans</a></li>
+          <li><a class="nav-link" href="#obszar">Obszar</a></li>
+          <li><a class="nav-link" href="#zasady">Zasady SPP</a></li>
+          <li><a class="nav-link" href="#doswiadczenia">Doświadczenia</a></li>
+          <li><a class="nav-link" href="#faq">FAQ</a></li>
+          <li><a class="nav-link nav-link-cta" href="#zabierz-glos">Zabierz głos</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <!-- SEKCJA 1: HERO -->
+    <section class="hero" id="start" aria-labelledby="hero-title">
+      <div class="container hero-inner">
+        <span class="hero-badge">KONSULTACJE OSIEDLOWE • ZBIERAMY OPINIE MIESZKAŃCÓW</span>
+        <h1 id="hero-title" class="hero-title">
+          Strefa Płatnego Parkowania na części Nowego Miasta – czy to dobre rozwiązanie dla naszego osiedla?
+        </h1>
+        <p class="hero-subtitle">
+          <strong class="text-highlight">Nic nie jest jeszcze przesądzone.</strong> Rada Osiedla Nowe Miasto rozpoczyna zbieranie opinii mieszkańców przed podjęciem dalszych kroków. Sprawdź, na czym polega ten pomysł, jakie ma plusy i minusy, a następnie przekaż nam swoje zdanie podczas dyżuru, spotkania lub mailowo.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#zabierz-glos">Zabierz głos w konsultacjach</a>
+          <a class="btn btn-secondary" href="#bilans">Poznaj argumenty za i przeciw</a>
+        </div>
+        <div class="hero-guarantees" aria-label="Najważniejsze zasady konsultacji">
+          <div class="hero-guarantee-pill">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+              <polyline points="22 4 12 14.01 9 11.01"></polyline>
+            </svg>
+            <span><strong>Nic nie jest przesądzone</strong> – bez wyraźnego poparcia mieszkańców nie złożymy wniosku</span>
+          </div>
+          <div class="hero-guarantee-pill">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            </svg>
+            <span><strong>Rada Osiedla nie ma z tego żadnych pieniędzy</strong> – wpływy trafiają wyłącznie do budżetu Miasta</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEKCJA 2: SKĄD TEN POMYSŁ? -->
+    <section class="section section-alt" id="dlaczego" aria-labelledby="dlaczego-title">
+      <div class="container">
+        <div class="section-header">
+          <h2 id="dlaczego-title">Skąd pomysł na konsultacje w sprawie parkowania?</h2>
+        </div>
+
+        <div class="grid-3">
+          <article class="card info-card">
+            <div class="icon-badge icon-badge-navy" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="4" width="18" height="16" rx="3"></rect>
+                <path d="M9 16V8h3.5a2.5 2.5 0 0 1 0 5H9"></path>
+              </svg>
+            </div>
+            <h3>Darmowy parking przesiadkowy</h3>
+            <p>
+              Bliskość biurowców, uczelni, punktów usługowych i przystanków sprawia, że część ulic na Nowym Mieście służy w ciągu dnia jako bezpłatny parking dla osób spoza osiedla.
+            </p>
+          </article>
+
+          <article class="card info-card">
+            <div class="icon-badge icon-badge-navy" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="9"></circle>
+                <polyline points="12 7 12 12 15.5 14"></polyline>
+              </svg>
+            </div>
+            <h3>Brak rotacji aut</h3>
+            <p>
+              Samochody zostawiane na 8–10 godzin blokują miejsca mieszkańcom wracającym z pracy, kurierom, lekarzom czy służbom komunalnym.
+            </p>
+          </article>
+
+          <article class="card info-card">
+            <div class="icon-badge icon-badge-green" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+              </svg>
+            </div>
+            <h3>Decyzja należy do mieszkańców</h3>
+            <p>
+              <strong>Nic nie jest jeszcze przesądzone</strong> – chcemy sprawdzić, czy mieszkańcy popierają wystąpienie do Miasta Rzeszowa o objęcie wybranych dróg publicznych Strefą Płatnego Parkowania, aby przywrócić priorytet parkowania osobom, które tu mieszkają.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEKCJA 3: UCZCIWY BILANS -->
+    <section class="section" id="bilans" aria-labelledby="bilans-title">
+      <div class="container">
+        <div class="section-header">
+          <h2 id="bilans-title">Uczciwy bilans: co zyskamy, a z czym trzeba się liczyć?</h2>
+          <p class="section-subtitle">
+            Wprowadzenie Strefy Płatnego Parkowania ma zarówno wyraźne zalety, jak i konkretne ograniczenia. Zestawiamy je obok siebie, aby ułatwić podjęcie świadomej decyzji.
+          </p>
+        </div>
+
+        <div class="grid-2 balance-grid">
+          <article class="card balance-card balance-card-pros">
+            <div class="balance-header balance-header-pros">
+              <span class="balance-icon" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                  <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                </svg>
+              </span>
+              <h3>Potencjalne korzyści</h3>
+            </div>
+            <ul class="balance-list">
+              <li>
+                <span class="list-marker list-marker-pros" aria-hidden="true">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                </span>
+                <span><strong>Więcej wolnych miejsc dla mieszkańców</strong> – zniknie większość aut pracowników i studentów parkujących tu przez cały dzień roboczy.</span>
+              </li>
+              <li>
+                <span class="list-marker list-marker-pros" aria-hidden="true">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                </span>
+                <span><strong>Niski koszt dla zameldowanych i najemców</strong> – abonament mieszkańca to obecnie 10 zł/mies. za pierwsze i 10 zł/mies. za drugie auto w gospodarstwie domowym.</span>
+              </li>
+              <li>
+                <span class="list-marker list-marker-pros" aria-hidden="true">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                </span>
+                <span><strong>Większa rotacja pod usługami</strong> – łatwiejszy podjazd na szybkie zakupy, do apteki czy przychodni (w aplikacjach mobilnych opłata naliczana jest za faktyczne minuty postoju).</span>
+              </li>
+              <li>
+                <span class="list-marker list-marker-pros" aria-hidden="true">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                </span>
+                <span><strong>Bezpieczniejszy przejazd dla służb</strong> – uporządkowanie miejsc postojowych i mniej aut blokujących skrzyżowania oraz przejazd karetkom i śmieciarkom.</span>
+              </li>
+              <li>
+                <span class="list-marker list-marker-pros" aria-hidden="true">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                </span>
+                <span><strong>Priorytet dla stałych mieszkańców rozliczających PIT w Rzeszowie</strong> – preferencyjny abonament (10 zł/mies., maks. 2 auta na lokal) wymaga meldunku lub umowy najmu i rozliczania podatku PIT w mieście, co ogranicza zajmowanie wielu miejsc przez osoby niezwiązane na stałe z Rzeszowem.</span>
+              </li>
+            </ul>
+          </article>
+
+          <article class="card balance-card balance-card-cons">
+            <div class="balance-header balance-header-cons">
+              <span class="balance-icon" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="12" y1="16" x2="12" y2="12"></line>
+                  <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                </svg>
+              </span>
+              <h3>Wyzwania i ograniczenia</h3>
+            </div>
+            <ul class="balance-list">
+              <li>
+                <span class="list-marker list-marker-cons" aria-hidden="true">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                  </svg>
+                </span>
+                <span><strong>Płatny postój dla gości i rodziny</strong> – osoby odwiedzające mieszkańców w dni robocze w godz. 8:00–20:00 będą musiały opłacić postój w parkomacie lub aplikacji.</span>
+              </li>
+              <li>
+                <span class="list-marker list-marker-cons" aria-hidden="true">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                  </svg>
+                </span>
+                <span><strong>Ryzyko przeniesienia ruchu</strong> – część kierowców spoza osiedla może szukać darmowych miejsc na sąsiednich ulicach poza strefą lub na parkingach spółdzielczych.</span>
+              </li>
+              <li>
+                <span class="list-marker list-marker-cons" aria-hidden="true">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                  </svg>
+                </span>
+                <span><strong>Brak rezerwacji konkretnego miejsca</strong> – abonament uprawnia do postoju w wyznaczonej części strefy bez opłat godzinowych, ale nie gwarantuje przypisanej „koperty” pod klatką.</span>
+              </li>
+              <li>
+                <span class="list-marker list-marker-cons" aria-hidden="true">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                  </svg>
+                </span>
+                <span><strong>Konieczność pilnowania formalności</strong> – trzeba pamiętać o wyrobieniu i corocznym/okresowym odnawianiu abonamentu w MATiP.</span>
+              </li>
+              <li>
+                <span class="list-marker list-marker-cons" aria-hidden="true">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                  </svg>
+                </span>
+                <span><strong>Wyższy koszt od trzeciego samochodu</strong> – niski abonament mieszkańca (10 zł/mies.) przysługuje na pierwsze i drugie auto w gospodarstwie domowym; za każde kolejne auto obowiązuje pełna opłata abonamentowa.</span>
+              </li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEKCJA 4: PROPONOWANY OBSZAR -->
+    <section class="section section-alt" id="obszar" aria-labelledby="obszar-title">
+      <div class="container">
+        <div class="section-header">
+          <h2 id="obszar-title">Jakiego obszaru dotyczy propozycja?</h2>
+          <p class="section-subtitle">
+            Poniższa mapa pokazuje orientacyjny obszar konsultacji na części Nowego Miasta. Ostateczny przebieg granic zostanie doprecyzowany wspólnie z mieszkańcami i Miejskim Zarządem Dróg.
+          </p>
+        </div>
+
+        <div class="card map-wrapper">
+          <div class="map-toolbar" aria-label="Sterowanie warstwami mapy">
+            <div class="map-toggles">
+              <label class="toggle-chip">
+                <input type="checkbox" id="toggle-area-layer" checked>
+                <span>Obszar konsultacji</span>
+              </label>
+            </div>
+            <button type="button" class="btn btn-secondary btn-sm" id="reset-map-view">
+              Przywróć widok obszaru
+            </button>
+          </div>
+
+          <div class="map-container" id="obszar-map" role="region" aria-label="Interaktywna mapa OpenStreetMap z orientacyjnym obszarem konsultacji na osiedlu Nowe Miasto">
+            <div class="map-fallback" id="map-fallback">
+              <p><strong>Ładowanie mapy OpenStreetMap…</strong></p>
+              <p>Jeśli mapa nie wyświetla się (np. przy braku dostępu do internetu), odśwież stronę po odzyskaniu połączenia.</p>
+            </div>
+          </div>
+
+          <div class="map-legend" aria-label="Legenda mapy">
+            <div class="legend-item">
+              <span class="legend-swatch legend-swatch-area" aria-hidden="true"></span>
+              <span>Orientacyjny obszar konsultacji (wyłącznie pasy dróg miejskich)</span>
+            </div>
+            <p class="legend-note">
+              Drogi wewnętrzne i parkingi Spółdzielni Mieszkaniowej Nowe Miasto położone wewnątrz tego obszaru pozostają wyłączone z miejskiej SPP.
+            </p>
+          </div>
+        </div>
+
+        <div class="area-rationale">
+          <h3 class="area-rationale-title">Dlaczego proponujemy właśnie tę część Nowego Miasta?</h3>
+          <div class="grid-2 area-rationale-grid">
+            <article class="card area-rationale-card">
+              <div class="icon-badge icon-badge-navy" aria-hidden="true">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+              </div>
+              <h4>Największe obciążenie ruchem i parkowaniem</h4>
+              <p>
+                Ten fragment osiedla jest w dni robocze najmocniej zastawiony samochodami osób spoza Nowego Miasta. Bezpośrednie sąsiedztwo <strong>Urzędu Skarbowego, CH Millenium Hall oraz Uniwersytetu Rzeszowskiego</strong> sprawia, że kierowcy dojeżdżający do pracy, na zakupy i na zajęcia traktują tutejsze ulice jako darmowy parking. Dodatkowo zaraz za mostem obowiązuje już Strefa Płatnego Parkowania, więc z darmowych miejsc na naszym osiedlu korzystają także osoby pracujące w centrum, ponieważ <strong>parking przy Hali Podpromie nie mieści już wszystkich samochodów</strong>.
+              </p>
+            </article>
+
+            <article class="card area-rationale-card">
+              <div class="icon-badge icon-badge-green" aria-hidden="true">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M3 3v18h18"></path>
+                  <path d="M18 17V9"></path>
+                  <path d="M13 17V5"></path>
+                  <path d="M8 17v-3"></path>
+                </svg>
+              </div>
+              <h4>Wnioski z wcześniejszych konsultacji SM Nowe Miasto</h4>
+              <p>
+                We wcześniejszych konsultacjach prowadzonych przez Spółdzielnię Mieszkaniową Nowe Miasto wynik dla całego osiedla był negatywny – i tę decyzję szanujemy, dlatego <strong>nie proponujemy strefy na całym osiedlu</strong>. Szczegółowa analiza tamtych odpowiedzi pokazała jednak, że właśnie w tej, najbardziej obciążonej części mieszkańcy opowiadali się za uporządkowaniem parkowania.
+              </p>
+            </article>
+          </div>
+        </div>
+
+        <!-- Ramka informacyjna (callout) -->
+        <aside class="callout-box" aria-label="Ważne rozgraniczenie własności dróg">
+          <div class="callout-icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="16" x2="12" y2="12"></line>
+              <line x1="12" y1="8" x2="12.01" y2="8"></line>
+            </svg>
+          </div>
+          <p>
+            <strong>Ważne rozgraniczenie:</strong> Miejska Strefa Płatnego Parkowania może obejmować wyłącznie pasy dróg publicznych zarządzanych przez Miasto Rzeszów. Nie dotyczy dróg wewnętrznych ani parkingów należących do Spółdzielni Mieszkaniowej Nowe Miasto – spółdzielnia zarządza swoim terenem niezależnie, tak jak i tereny prywatne, jednak większość miejsc parkingowych obecnie w strefie konsultacji będzie objętych SPP.
+          </p>
+        </aside>
+      </div>
+    </section>
+
+    <!-- SEKCJA 5: JAK DZIAŁA SPP W RZESZOWIE? -->
+    <section class="section" id="zasady" aria-labelledby="zasady-title">
+      <div class="container">
+        <div class="section-header">
+          <h2 id="zasady-title">Jak działa Strefa Płatnego Parkowania w Rzeszowie? (Twarde fakty)</h2>
+          <p class="section-subtitle">
+            Zasady reguluje uchwała Rady Miasta Rzeszowa (nr XVIII/372/2015 z późn. zm.), a strefą zarządza Miejska Administracja Targowisk i Parkingów (MATiP).
+          </p>
+        </div>
+
+        <div class="grid-2 facts-grid">
+          <article class="card fact-card">
+            <div class="fact-header">
+              <div class="icon-badge icon-badge-green" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="5" width="20" height="14" rx="2"></rect>
+                  <line x1="2" y1="10" x2="22" y2="10"></line>
+                </svg>
+              </div>
+              <h3>Abonament mieszkańca – 10 zł/mies.</h3>
+            </div>
+            <p>
+              Przysługuje maksymalnie na 2 pojazdy w gospodarstwie domowym: 10 zł/mies. za pierwszy i 10 zł/mies. za drugi samochód (na ulicach objętych strefą w pobliżu miejsca zamieszkania). Mogą go wyrobić zarówno osoby zameldowane, jak i najemcy (na podstawie umowy najmu), rozliczające PIT w Rzeszowie i posiadające tytuł prawny do auta (własność, współwłasność, leasing, użyczenie). Mieszkaniec z ważnym abonamentem nie musi korzystać z aplikacji w telefonie ani pobierać biletów w parkomacie.
+            </p>
+            <p class="fact-note">
+              Szczegółowe zasady dotyczące ewentualnego trzeciego i kolejnego pojazdu w gospodarstwie domowym warto potwierdzić bezpośrednio w aktualnym cenniku MATiP.
+            </p>
+          </article>
+
+          <article class="card fact-card">
+            <div class="fact-header">
+              <div class="icon-badge icon-badge-navy" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="4" width="18" height="18" rx="2"></rect>
+                  <line x1="16" y1="2" x2="16" y2="6"></line>
+                  <line x1="8" y1="2" x2="8" y2="6"></line>
+                  <line x1="3" y1="10" x2="21" y2="10"></line>
+                </svg>
+              </div>
+              <h3>Godziny obowiązywania</h3>
+            </div>
+            <p>
+              Opłaty obowiązują wyłącznie w dni robocze (poniedziałek – piątek) w godz. 8:00–20:00. Wieczory, noce, soboty, niedziele oraz święta są całkowicie bezpłatne.
+            </p>
+          </article>
+
+          <article class="card fact-card">
+            <div class="fact-header">
+              <div class="icon-badge icon-badge-navy" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="9"></circle>
+                  <path d="M14.5 9a3 3 0 0 0-5 0c0 2 5 2 5 4a3 3 0 0 1-5 0"></path>
+                  <line x1="12" y1="6" x2="12" y2="18"></line>
+                </svg>
+              </div>
+              <h3>Stawki dla gości i osób spoza strefy (Podstrefy II–IV)</h3>
+            </div>
+            <p>
+              <strong>1. godz.: 3,00 zł | 2. godz.: 3,60 zł | 3. godz.: 4,30 zł | 4. i kolejna godz.: 3,00 zł.</strong> Opłatę wnosi się do 10 minut od zaparkowania w parkomacie (karta, bilon) lub w jednej z 7 aplikacji mobilnych (AnyPark, moBilet, SkyCash, ePark, paymove, CityParkingGroup, Flowbird) z naliczaniem minutowym Start/Stop.
+            </p>
+            <p class="fact-note">
+              (Powyżej podano obowiązujący cennik dla Podstref II–IV; ostateczne przypisanie do podstrefy określa uchwała Rady Miasta Rzeszowa.)
+            </p>
+          </article>
+
+          <article class="card fact-card">
+            <div class="fact-header">
+              <div class="icon-badge icon-badge-green" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+              </div>
+              <h3>Zwolnienia i budżet miasta</h3>
+            </div>
+            <p>
+              Z opłat zwolnione są m.in. pojazdy elektryczne oraz osoby z kartą parkingową na wyznaczonych miejscach.
+            </p>
+            <p class="fact-highlight">
+              <strong>Rada Osiedla nie ma z tego żadnych pieniędzy:</strong> wpływy z biletów i abonamentów trafiają bezpośrednio do budżetu Miasta Rzeszowa, a nie do Rady Osiedla.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEKCJA 6: DOŚWIADCZENIA Z INNYCH OSIEDLI RZESZOWA -->
+    <section class="section section-alt" id="doswiadczenia" aria-labelledby="doswiadczenia-title">
+      <div class="container">
+        <div class="section-header">
+          <h2 id="doswiadczenia-title">Jak to sprawdziło się na innych osiedlach w Rzeszowie?</h2>
+          <p class="section-subtitle">
+            O zdanie zapytaliśmy Rady Osiedli, na których Strefa Płatnego Parkowania została wprowadzona w ostatnim czasie.
+          </p>
+        </div>
+
+        <div class="grid-2 quotes-grid">
+          <article class="card quote-card">
+            <div class="quote-mark" aria-hidden="true">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M10 11H6a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v7c0 2.76-2.24 5-5 5v-2a3 3 0 0 0 3-3v-3zm9 0h-4a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v7c0 2.76-2.24 5-5 5v-2a3 3 0 0 0 3-3v-3z"></path>
+              </svg>
+            </div>
+            <span class="quote-badge">Osiedle Dąbrowskiego</span>
+            <blockquote class="quote-text">
+              „[UZUPEŁNIJ AUTORYZOWANĄ WYPOWIEDŹ – np. Przed wprowadzeniem strefy mieszkańcy mieli sporo obaw, głównie o gości i formalności. Po uruchomieniu SPP z ulic zniknęły samochody pozostawiane na cały dzień przez osoby dojeżdżające do pracy czy na uczelnię, a mieszkańcy z abonamentem za 10 zł odzyskali realną możliwość zaparkowania blisko domu.]”
+            </blockquote>
+            <footer class="quote-footer">
+              <p class="quote-author">[UZUPEŁNIJ IMIĘ I NAZWISKO]</p>
+              <p class="quote-role">Przewodniczący/a Rady Osiedla Dąbrowskiego w Rzeszowie</p>
+            </footer>
+          </article>
+
+          <article class="card quote-card">
+            <div class="quote-mark" aria-hidden="true">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M10 11H6a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v7c0 2.76-2.24 5-5 5v-2a3 3 0 0 0 3-3v-3zm9 0h-4a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v7c0 2.76-2.24 5-5 5v-2a3 3 0 0 0 3-3v-3z"></path>
+              </svg>
+            </div>
+            <span class="quote-badge">Osiedle 1000-Lecia</span>
+            <blockquote class="quote-text">
+              „Nie prowadziliśmy oficjalnych statystyk ani badań liczby wolnych miejsc po wprowadzeniu strefy. Z ustnych relacji części mieszkańców wynika jednak, że w godzinach działania SPP przybyło wolnych miejsc postojowych, a problem całodniowego parkowania aut przez osoby spoza osiedla znacznie się zmniejszył.”
+            </blockquote>
+            <footer class="quote-footer">
+              <p class="quote-author">Komisja ds. Bezpieczeństwa i Ruchu Drogowego</p>
+              <p class="quote-role">Rada Osiedla 1000-Lecia Nr XI w Rzeszowie (z up. Przewodniczącego, 26.11.2026 r.)</p>
+            </footer>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEKCJA 7: ZABIERZ GŁOS – BEZPOŚREDNIE KONSULTACJE -->
+    <section class="section" id="zabierz-glos" aria-labelledby="zabierz-glos-title">
+      <div class="container">
+        <div class="section-header">
+          <h2 id="zabierz-glos-title">Zabierz głos – Twoja opinia zdecyduje o dalszych krokach</h2>
+          <p class="section-subtitle">
+            Zbieramy pytania i uwagi mieszkańców do <strong data-config="end-date">końca stycznia 2026 r.</strong> Dopiero po dyżurach i spotkaniu przeprowadzimy pisemną ankietę z mieszkańcami planowanej strefy, a jej wyniki opublikujemy publicznie na tej stronie oraz na profilu Rady Osiedla.
+          </p>
+        </div>
+
+        <div class="grid-3 contact-grid">
+          <article class="card contact-card">
+            <div class="icon-badge icon-badge-green" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+                <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+                <path d="M9 14l2 2 4-4"></path>
+              </svg>
+            </div>
+            <h3>Dyżury Rady Osiedla (pytania i uwagi)</h3>
+            <p>
+              Przyjdź osobiście w styczniu, porozmawiaj z radnymi, zobacz dokładne granice proponowanego obszaru i zgłoś swoje pytania lub uwagi dotyczące Twojej ulicy.
+            </p>
+            <div class="contact-detail-box">
+              <span class="detail-label">Termin i miejsce dyżuru</span>
+              <span class="detail-value" data-config="duty-schedule">w styczniu: każdy czwartek w godz. 17:00–18:00, siedziba Rady Osiedla</span>
+            </div>
+          </article>
+
+          <article class="card contact-card">
+            <div class="icon-badge icon-badge-navy" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+              </svg>
+            </div>
+            <h3>Otwarte spotkanie konsultacyjne</h3>
+            <p>
+              Zapraszamy na otwarte spotkanie osiedlowe poświęcone parkowaniu na Nowym Mieście. Wspólnie omówimy argumenty za i przeciw oraz dokładny przebieg proponowanych granic.
+            </p>
+            <div class="contact-detail-box">
+              <span class="detail-label">Data, godzina i miejsce spotkania</span>
+              <span class="detail-value" data-config="meeting-schedule">ostatni tydzień stycznia 2026 r. (konkretną datę i miejsce podamy z 14-dniowym wyprzedzeniem)</span>
+            </div>
+          </article>
+
+          <article class="card contact-card">
+            <div class="icon-badge icon-badge-navy" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+              </svg>
+            </div>
+            <h3>Kontakt e-mail</h3>
+            <p>
+              Nie możesz przyjść osobiście? Napisz wiadomość, podając nazwę swojej ulicy na Nowym Mieście, swoje stanowisko (za lub przeciw) oraz ewentualne uwagi i propozycje.
+            </p>
+            <div class="contact-detail-box">
+              <span class="detail-label">Adres e-mail Rady Osiedla</span>
+              <span class="detail-value" data-config="email-text">[UZUPEŁNIJ ADRES E-MAIL]</span>
+            </div>
+            <div class="contact-card-actions">
+              <a class="btn btn-primary" id="email-action-btn" href="#zabierz-glos">Napisz wiadomość e-mail</a>
+              <button type="button" class="btn btn-secondary" id="copy-email-btn">Skopiuj adres e-mail</button>
+              <p class="copy-feedback" id="copy-feedback" aria-live="polite"></p>
+            </div>
+          </article>
+        </div>
+
+        <aside class="trust-banner" aria-label="Informacja o sposobie zbierania opinii">
+          <div class="trust-banner-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              <path d="M9 12l2 2 4-4"></path>
+            </svg>
+          </div>
+          <p>
+            <strong>Dlaczego nie ma głosowania online?</strong> Zrezygnowaliśmy z anonimowego formularza w internecie, aby wyniki konsultacji odzwierciedlały rzetelny głos faktycznych mieszkańców Nowego Miasta, bez ryzyka wielokrotnego głosowania osób spoza osiedla.
+          </p>
+        </aside>
+
+        <div class="timeline-block" aria-labelledby="timeline-title">
+          <h3 class="timeline-title" id="timeline-title">Co dalej po konsultacjach?</h3>
+          <ol class="timeline-grid">
+            <li class="card timeline-step">
+              <span class="timeline-badge" aria-hidden="true">1</span>
+              <h4>Dyżury i spotkanie (styczeń)</h4>
+              <p>Zbieranie pytań i uwag mieszkańców na czwartkowych dyżurach (17:00–18:00) oraz podczas otwartego spotkania w ostatnim tygodniu stycznia.</p>
+            </li>
+            <li class="card timeline-step">
+              <span class="timeline-badge" aria-hidden="true">2</span>
+              <h4>Pisemna ankieta z mieszkańcami strefy</h4>
+              <p>Dopiero po dyżurach i spotkaniu przeprowadzimy pisemną ankietę bezpośrednio wśród mieszkańców planowanej strefy.</p>
+            </li>
+            <li class="card timeline-step">
+              <span class="timeline-badge" aria-hidden="true">3</span>
+              <h4>Publiczne wyniki i decyzja</h4>
+              <p>Opublikujemy podsumowanie pisemnej ankiety. Wniosek do Miasta Rzeszowa złożymy <strong>wyłącznie w przypadku wyraźnego poparcia ze strony mieszkańców</strong>.</p>
+            </li>
+            <li class="card timeline-step">
+              <span class="timeline-badge" aria-hidden="true">4</span>
+              <h4>Procedura miejska</h4>
+              <p>Analiza Miejskiego Zarządu Dróg, projekt organizacji ruchu oraz głosowanie nad uchwałą Rady Miasta Rzeszowa.</p>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEKCJA 8: FAQ -->
+    <section class="section section-alt" id="faq" aria-labelledby="faq-title">
+      <div class="container container-narrow">
+        <div class="section-header">
+          <h2 id="faq-title">Najczęstsze pytania i wątpliwości (FAQ)</h2>
+        </div>
+
+        <div class="faq-list" id="faq-list">
+          <article class="faq-item">
+            <h3 class="faq-heading">
+              <button type="button" class="faq-trigger" aria-expanded="false" aria-controls="faq-panel-1" id="faq-btn-1">
+                <span>Czy Rada Osiedla podjęła już decyzję za mieszkańców?</span>
+                <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+            </h3>
+            <div class="faq-panel" id="faq-panel-1" role="region" aria-labelledby="faq-btn-1" hidden>
+              <div class="faq-panel-inner">
+                <p>
+                  <strong>Nie – nic nie jest jeszcze przesądzone.</strong> Ta strona oraz dyżury i spotkania konsultacyjne są właśnie po to, aby poznać zdanie mieszkańców przed podjęciem jakichkolwiek wiążących kroków. <strong>Tylko wyraźne poparcie ze strony mieszkańców</strong> będzie podstawą do skierowania wniosku do władz Miasta Rzeszowa.
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <article class="faq-item">
+            <h3 class="faq-heading">
+              <button type="button" class="faq-trigger" aria-expanded="false" aria-controls="faq-panel-2" id="faq-btn-2">
+                <span>Mam w rodzinie dwa samochody – ile zapłacę za abonament?</span>
+                <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+            </h3>
+            <div class="faq-panel" id="faq-panel-2" role="region" aria-labelledby="faq-btn-2" hidden>
+              <div class="faq-panel-inner">
+                <p>
+                  Zgodnie z obowiązującą uchwałą Rady Miasta Rzeszowa abonament mieszkańca przysługuje maksymalnie na dwa pojazdy w jednym gospodarstwie domowym i kosztuje 10 zł miesięcznie za pierwszy samochód oraz 10 zł miesięcznie za drugi (czyli 120 zł rocznie za jedno auto lub 240 zł rocznie za dwa).
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <article class="faq-item">
+            <h3 class="faq-heading">
+              <button type="button" class="faq-trigger" aria-expanded="false" aria-controls="faq-panel-3" id="faq-btn-3">
+                <span>Wynajmuję mieszkanie na Nowym Mieście i nie mam tu meldunku – czy dostanę abonament?</span>
+                <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+            </h3>
+            <div class="faq-panel" id="faq-panel-3" role="region" aria-labelledby="faq-btn-3" hidden>
+              <div class="faq-panel-inner">
+                <p>
+                  Tak. Regulamin MATiP honoruje nie tylko zameldowanie (stałe lub czasowe), ale także umowę najmu lokalu mieszkalnego w obszarze strefy. Warunkiem jest rozliczanie podatku PIT w Rzeszowie oraz posiadanie tytułu prawnego do samochodu (własność, współwłasność, umowa leasingu lub pisemna umowa użyczenia).
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <article class="faq-item">
+            <h3 class="faq-heading">
+              <button type="button" class="faq-trigger" aria-expanded="false" aria-controls="faq-panel-4" id="faq-btn-4">
+                <span>Mieszkam w bloku przy drodze wewnętrznej Spółdzielni (poza strefą), ale parkuję na sąsiedniej ulicy miejskiej – czy dostanę abonament za 10 zł?</span>
+                <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+            </h3>
+            <div class="faq-panel" id="faq-panel-4" role="region" aria-labelledby="faq-btn-4" hidden>
+              <div class="faq-panel-inner">
+                <p>
+                  Uprawnienie do abonamentu mieszkańca zależy od adresu zamieszkania (zameldowania lub najmu) przypisanego do konkretnej podstrefy i wykazu ulic w uchwale Rady Miasta. Przed złożeniem ewentualnego wniosku doprecyzujemy z MATiP dokładny wykaz adresów uprawnionych do abonamentu, aby mieszkańcy sąsiadujących bloków spółdzielczych mieli pełną jasność.
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <article class="faq-item">
+            <h3 class="faq-heading">
+              <button type="button" class="faq-trigger" aria-expanded="false" aria-controls="faq-panel-5" id="faq-btn-5">
+                <span>Czy wprowadzenie strefy nie sprawi, że auta z zewnątrz zaleją parkingi spółdzielcze?</span>
+                <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+            </h3>
+            <div class="faq-panel" id="faq-panel-5" role="region" aria-labelledby="faq-btn-5" hidden>
+              <div class="faq-panel-inner">
+                <p>
+                  To realne ryzyko, o którym otwarcie piszemy w bilansie powyżej. Dlatego równolegle z rozmowami o strefie na drogach miejskich konieczna jest współpraca ze Spółdzielnią Mieszkaniową Nowe Miasto w sprawie zabezpieczenia jej parkingów wewnętrznych (np. szlabanami lub identyfikatorami dla mieszkańców).
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <article class="faq-item">
+            <h3 class="faq-heading">
+              <button type="button" class="faq-trigger" aria-expanded="false" aria-controls="faq-panel-6" id="faq-btn-6">
+                <span>Co w sytuacji, gdy zapomnę opłacić postój i dostanę wezwanie?</span>
+                <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+            </h3>
+            <div class="faq-panel" id="faq-panel-6" role="region" aria-labelledby="faq-btn-6" hidden>
+              <div class="faq-panel-inner">
+                <p>
+                  Kontrolerzy MATiP wystawiają zawiadomienie o opłacie dodatkowej. Przy wpłacie w ciągu 3 dni wynosi ona 70 zł (do 7 dni – 150 zł, powyżej 7 dni – 200 zł). Korzystając z darmowych aplikacji mobilnych (np. AnyPark, moBilet, SkyCash), można ustawić przypomnienia i płacić wyłącznie za realne minuty postoju. Warto pamiętać, że o terminie wpłaty decyduje data wpływu środków na rachunek MATiP.
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <article class="faq-item">
+            <h3 class="faq-heading">
+              <button type="button" class="faq-trigger" aria-expanded="false" aria-controls="faq-panel-7" id="faq-btn-7">
+                <span>Ile czasu trwa wprowadzenie takiej strefy, jeśli mieszkańcy powiedzą „tak”?</span>
+                <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+            </h3>
+            <div class="faq-panel" id="faq-panel-7" role="region" aria-labelledby="faq-btn-7" hidden>
+              <div class="faq-panel-inner">
+                <p>
+                  To proces wieloetapowy, który trwa zazwyczaj od kilku do kilkunastu miesięcy. Wymaga złożenia wniosku, analizy Miejskiego Zarządu Dróg, podjęcia uchwały przez Radę Miasta Rzeszowa, zatwierdzenia projektu nowej organizacji ruchu oraz montażu oznakowania i parkomatów.
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <article class="faq-item">
+            <h3 class="faq-heading">
+              <button type="button" class="faq-trigger" aria-expanded="false" aria-controls="faq-panel-8" id="faq-btn-8">
+                <span>Czy Spółdzielnia Mieszkaniowa Nowe Miasto nie przeprowadzała już wcześniej konsultacji w tej sprawie?</span>
+                <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+            </h3>
+            <div class="faq-panel" id="faq-panel-8" role="region" aria-labelledby="faq-btn-8" hidden>
+              <div class="faq-panel-inner">
+                <p>
+                  Tak. Wcześniejsze konsultacje SM Nowe Miasto dotyczyły całego osiedla i w skali całego Nowego Miasta dały wynik negatywny. Analiza odpowiedzi pokazała jednak wyraźną różnicę między poszczególnymi częściami osiedla – w rejonie sąsiadującym z Urzędem Skarbowym, CH Millenium Hall i Uniwersytetem Rzeszowskim mieszkańcy częściej wskazywali potrzebę zmian. Dlatego obecna propozycja jest ograniczona wyłącznie do tego najbardziej obciążonego fragmentu.
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <article class="faq-item">
+            <h3 class="faq-heading">
+              <button type="button" class="faq-trigger" aria-expanded="false" aria-controls="faq-panel-9" id="faq-btn-9">
+                <span>Prowadzę punkt usługowy, gabinet lub sklep w tym rejonie – jak strefa wpłynie na klientów i dostawy?</span>
+                <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+            </h3>
+            <div class="faq-panel" id="faq-panel-9" role="region" aria-labelledby="faq-btn-9" hidden>
+              <div class="faq-panel-inner">
+                <p>
+                  W godzinach 8:00–20:00 w dni robocze większa rotacja samochodów zwykle ułatwia klientom podjazd na krótkie zakupy lub wizytę – w aplikacjach mobilnych opłata naliczana jest za faktyczne minuty postoju (krótki postój to ułamek stawki godzinowej). Przedsiębiorcy i pracownicy mogą korzystać z abonamentów przewidzianych w cenniku MATiP, a ewentualne miejsca dla dostaw są analizowane na etapie projektu organizacji ruchu przygotowywanego przez Miejski Zarząd Dróg.
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <article class="faq-item">
+            <h3 class="faq-heading">
+              <button type="button" class="faq-trigger" aria-expanded="false" aria-controls="faq-panel-10" id="faq-btn-10">
+                <span>Wynajmuję komuś mieszkanie (np. studentom lub pracownikom) – czy moi lokatorzy będą mogli wykupić abonament?</span>
+                <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+            </h3>
+            <div class="faq-panel" id="faq-panel-10" role="region" aria-labelledby="faq-btn-10" hidden>
+              <div class="faq-panel-inner">
+                <p>
+                  Tak – pod warunkiem posiadania pisemnej umowy najmu, rozliczania podatku PIT w Rzeszowie oraz w ramach limitu maksymalnie 2 pojazdów na gospodarstwo domowe. Dzięki temu uczciwie wynajmowane mieszkania zachowują pełny dostęp do abonamentu za 10 zł/mies., a jednocześnie ogranicza się zajmowanie wielu miejsc postojowych przez osoby niezwiązane podatkowo z miastem.
+                </p>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- SEKCJA 9: STOPKA -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="footer-title">Rada Osiedla Nowe Miasto w Rzeszowie</p>
+      <p class="footer-line">
+        Kontakt e-mail: <span data-config="email-text">[UZUPEŁNIJ ADRES E-MAIL]</span> | Dyżury radnych: <span data-config="duty-schedule">w styczniu: każdy czwartek w godz. 17:00–18:00, siedziba Rady Osiedla</span>
+      </p>
+      <p class="footer-line">
+        Oficjalny regulamin i dokumenty SPP w Rzeszowie:
+        <a href="https://www.erzeszow.pl" target="_blank" rel="noopener noreferrer">erzeszow.pl</a>
+        / MATiP Rzeszów (ul. ks. J. Jałowego 23A, tel. <a href="tel:177482590">17 748 25 90</a>)
+      </p>
+      <p class="footer-note">
+        Strona ma charakter informacyjno-konsultacyjny. Nic nie jest przesądzone, a Rada Osiedla Nowe Miasto nie otrzymuje żadnych środków finansowych ze Strefy Płatnego Parkowania.
+      </p>
+    </div>
+  </footer>
+
+  <!-- Przyklejony pasek CTA na urządzeniach mobilnych -->
+  <div class="mobile-sticky-cta" id="mobile-sticky-cta">
+    <a class="btn btn-primary btn-block" href="#zabierz-glos">Zabierz głos w konsultacjach</a>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+  <script src="app.js"></script>
+</body>
+</html>
