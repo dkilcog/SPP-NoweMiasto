@@ -14,12 +14,12 @@ const CONFIG = {
     password: 'NoweMiasto2026'
   },
 
-  consultationEndDate: 'końca stycznia 2026 r.',
+  consultationEndDate: 'końca stycznia 2027 r.',
 
   contact: {
     email: '[UZUPEŁNIJ ADRES E-MAIL]',
     dutySchedule: 'w styczniu: każdy czwartek w godz. 17:00–18:00, siedziba Rady Osiedla',
-    meetingSchedule: 'ostatni tydzień stycznia 2026 r. (konkretną datę i miejsce podamy z 14-dniowym wyprzedzeniem)'
+    meetingSchedule: 'ostatni tydzień stycznia 2027 r. (konkretną datę i miejsce podamy z 14-dniowym wyprzedzeniem)'
   },
 
   map: {
