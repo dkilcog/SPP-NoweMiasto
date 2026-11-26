@@ -8,6 +8,12 @@
  *    (pamiętaj: GeoJSON zapisuje współrzędne w kolejności [długość, szerokość], czyli [lng, lat]).
  */
 const CONFIG = {
+  // Prosta blokada hasłem na czas testów (ustaw enabled: false przed publikacją)
+  previewGate: {
+    enabled: true,
+    password: 'NoweMiasto2026'
+  },
+
   consultationEndDate: 'końca stycznia 2026 r.',
 
   contact: {
@@ -71,8 +77,101 @@ document.addEventListener('DOMContentLoaded', () => {
   initNavigation();
   initMobileStickyCta();
   initFaqAccordion();
-  initMap();
+  const mapApi = initMap();
+  initPreviewGate(() => {
+    if (mapApi && typeof mapApi.invalidateSize === 'function') {
+      mapApi.invalidateSize();
+    }
+  });
 });
+
+/**
+ * Tymczasowa kurtyna z hasłem na czas testów roboczych.
+ */
+function initPreviewGate(onUnlock) {
+  if (!CONFIG.previewGate || !CONFIG.previewGate.enabled) return;
+
+  const storageKey = 'spp_preview_unlocked';
+  try {
+    if (window.sessionStorage.getItem(storageKey) === '1') {
+      return;
+    }
+  } catch (_err) {
+    // Brak dostępu do sessionStorage nie blokuje działania bramki
+  }
+
+  document.body.classList.add('is-gate-locked');
+
+  const overlay = document.createElement('div');
+  overlay.id = 'preview-gate';
+  overlay.className = 'preview-gate';
+  overlay.setAttribute('role', 'dialog');
+  overlay.setAttribute('aria-modal', 'true');
+  overlay.setAttribute('aria-labelledby', 'preview-gate-title');
+
+  overlay.innerHTML = `
+    <div class="card preview-gate-card">
+      <span class="hero-badge">PODGLĄD ROBOCZY</span>
+      <h2 id="preview-gate-title">Wersja robocza – podgląd testowy</h2>
+      <p class="preview-gate-desc">
+        Strona konsultacyjna Rady Osiedla Nowe Miasto jest w trakcie przygotowania. Wpisz hasło testowe, aby otworzyć podgląd.
+      </p>
+      <label class="sr-only" for="preview-gate-input">Hasło testowe</label>
+      <input
+        type="password"
+        id="preview-gate-input"
+        class="preview-gate-input"
+        placeholder="Wpisz hasło testowe..."
+        autocomplete="off"
+      >
+      <button type="button" id="preview-gate-submit" class="btn btn-primary btn-block">
+        Otwórz podgląd
+      </button>
+      <p id="preview-gate-error" class="preview-gate-error" aria-live="polite"></p>
+    </div>
+  `;
+
+  document.body.appendChild(overlay);
+
+  const input = document.getElementById('preview-gate-input');
+  const submitBtn = document.getElementById('preview-gate-submit');
+  const errorEl = document.getElementById('preview-gate-error');
+
+  const tryUnlock = () => {
+    if (!input) return;
+    if (input.value.trim() === CONFIG.previewGate.password) {
+      try {
+        window.sessionStorage.setItem(storageKey, '1');
+      } catch (_err) {
+        // Ignoruj błąd zapisu w trybie prywatnym
+      }
+      document.body.classList.remove('is-gate-locked');
+      overlay.remove();
+      if (typeof onUnlock === 'function') {
+        onUnlock();
+      }
+    } else {
+      if (errorEl) {
+        errorEl.textContent = 'Nieprawidłowe hasło. Spróbuj ponownie.';
+      }
+      input.focus();
+      input.select();
+    }
+  };
+
+  if (submitBtn) {
+    submitBtn.addEventListener('click', tryUnlock);
+  }
+  if (input) {
+    input.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        tryUnlock();
+      }
+    });
+    window.setTimeout(() => input.focus(), 50);
+  }
+}
 
 /**
  * Uzupełnia dane kontaktowe i datę z CONFIG w odpowiednich elementach strony.
@@ -314,6 +413,13 @@ function initMap() {
       map.invalidateSize();
     }, 150);
   });
+
+  return {
+    invalidateSize: () => {
+      map.invalidateSize();
+      map.fitBounds(areaLayer.getBounds(), { padding: [20, 20] });
+    }
+  };
 }
 
 function escapeHtml(value) {
